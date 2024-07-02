@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <AssemblyName>Sistema Estiba PDQ</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net472</TargetFramework>
+    <Prefer32Bit>True</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>11.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Sistema_Estiba_PDQ.ReporteOT.rdlc" />
+    <None Remove="Sistema_Estiba_PDQ.ReporteRespaldo.rdlc" />
+    <None Remove="Sistema_Estiba_PDQ.ReporteUsuarios.rdlc" />
+    <EmbeddedResource Include="Sistema_Estiba_PDQ.ReporteOT.rdlc" LogicalName="Sistema_Estiba_PDQ.ReporteOT.rdlc" />
+    <EmbeddedResource Include="Sistema_Estiba_PDQ.ReporteRespaldo.rdlc" LogicalName="Sistema_Estiba_PDQ.ReporteRespaldo.rdlc" />
+    <EmbeddedResource Include="Sistema_Estiba_PDQ.ReporteUsuarios.rdlc" LogicalName="Sistema_Estiba_PDQ.ReporteUsuarios.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="MySql.Data">
+      <HintPath>..\Sistema Estiba\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing">
+      <HintPath>..\Sistema Estiba\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="Microsoft.ReportViewer.WinForms">
+      <HintPath>..\Sistema Estiba\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+</Project>
