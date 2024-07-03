@@ -24,6 +24,9 @@
     <EmbeddedResource Include="Sistema_Estiba_PDQ.ReporteUsuarios.rdlc" LogicalName="Sistema_Estiba_PDQ.ReporteUsuarios.rdlc" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.0.0" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="MySql.Data">
       <HintPath>..\Sistema Estiba\MySql.Data.dll</HintPath>
@@ -34,6 +37,7 @@
     <Reference Include="System.Data" />
     <Reference Include="Microsoft.ReportViewer.WinForms">
       <HintPath>..\Sistema Estiba\Microsoft.ReportViewer.WinForms.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Data.DataSetExtensions" />

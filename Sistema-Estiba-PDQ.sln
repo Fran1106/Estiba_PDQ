@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sistema-Estiba-PDQ", "Sistema-Estiba-PDQ.csproj", "{7F152B2D-DC39-4C7E-8162-94E9F318F7F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F152B2D-DC39-4C7E-8162-94E9F318F7F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F152B2D-DC39-4C7E-8162-94E9F318F7F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F152B2D-DC39-4C7E-8162-94E9F318F7F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F152B2D-DC39-4C7E-8162-94E9F318F7F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4E8DFBA-FB29-4B3A-BF67-FE9CE9B27C6A}
+	EndGlobalSection
+EndGlobal
