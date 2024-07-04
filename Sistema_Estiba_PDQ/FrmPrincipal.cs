@@ -413,7 +413,7 @@ public class FrmPrincipal : Form
 		base.MainMenuStrip = this.MenuStrip1;
 		base.Name = "FrmPrincipal";
 		base.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-		this.Text = "Sstema Estiba PDQ";
+		this.Text = "Sistema Estiba PDQ";
 		base.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 		this.MenuStrip1.ResumeLayout(false);
 		this.MenuStrip1.PerformLayout();
