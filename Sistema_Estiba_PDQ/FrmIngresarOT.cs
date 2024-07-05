@@ -1248,7 +1248,8 @@ public class FrmIngresarOT : Form
 			ms2.Close();
 			DgvIngresarOT.Rows.Add(TxtFolio.Text, TxtDestino2.Text, TxtCodigo2.Text, TxtOt.Text, TxtBulto.Text, TxtHora.Text, bytImage2);
 		}
-        Console.WriteLine("Ingreso datos de capturador :", TxtFolio.Text, TxtDestino2.Text, TxtCodigo2.Text, TxtOt.Text, TxtBulto.Text, TxtHora.Text); 
+        consolidaOt.Consultar(TxtOt.Text);
+        MessageBox.Show("FrmIngresarOT.BtnAgregar_Click capturadora anrtes de consultar --> ot " + TxtOt.Text);
     }
 
 	private void BtnOperacion_Click(object sender, EventArgs e)
@@ -1305,15 +1306,10 @@ public class FrmIngresarOT : Form
 			vCmd.ExecuteNonQuery();
 			ModuleDB.Desconectar();
 
-			consolidaOt.Consultar(OT);
-
-		}
+            consolidaOt.SumAllOt(Ot);
+        }
 		string conteo = Conversions.ToString(DgvIngresarOT.RowCount);
 		Interaction.MsgBox("Registros Guardados - El Total De Registros Es: " + conteo, MsgBoxStyle.Information, ":: PDQ :::");
-
-		// AQUI OBTENEMOS OT PARA CONSULTA PESO VOLUMETRICO
-		MessageBox.Show(Conversions.ToString(DgvIngresarOT.RowCount));
-
 		ordenar_datos();
 	}
 
@@ -1336,9 +1332,18 @@ public class FrmIngresarOT : Form
 			localReport = null;
 			MyProject.Forms.FrmReporteOT.ShowDialog();
 			MyProject.Forms.FrmReporteOT.ReportViewer1.RefreshReport();
+
+			/*
+			 calcula pvkilos
+			 */
+			MessageBox.Show("FrmIngresarOT.imprimir_reporte : previo bultosOK");
+            consolidaOt.bultosOK("");
+
             limpiar_cajas();
 		}
-	}
+
+        MessageBox.Show("FrmIngresarOT.imprimir_reporte fuera checked");
+    }
 
 	private void DgvIngresarOT_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 	{

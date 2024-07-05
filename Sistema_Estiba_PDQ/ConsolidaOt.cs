@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
 using Microsoft.VisualBasic.CompilerServices;
+using Microsoft.VisualBasic.Logging;
 
 
 namespace Sistema_Estiba_PDQ;
@@ -17,11 +18,12 @@ public class ConsolidaOt
     private NpgsqlDataReader read;
     
     List<DataReporteCalidad> dataReporteCalidads = new List<DataReporteCalidad>();
+    long PesoVolumetrico = 0L;
 
-    public object Consultar(string expedicion)
+    public void Consultar(string expedicion)
     {
         try
-    {
+        {
         string query = "select * from  alerce.reporte_calidad where expedicion = " + expedicion;
 
             ModuleNpgSql.Conexion();
@@ -32,8 +34,6 @@ public class ConsolidaOt
             {
                 string pvkilos = Convert.ToString(read["PVKILOS"]);
                 int bultos = Convert.ToInt32(read["BULTOS"]);
-                Console.WriteLine("Data expedicion: " + expedicion + " pvkilos: " + pvkilos + " bultos: " + bultos);
-
                 dataReporteCalidads.Add(new DataReporteCalidad(expedicion,bultos,pvkilos,false) );
             }
         }
@@ -44,17 +44,46 @@ public class ConsolidaOt
             MessageBox.Show("Error al obtener datos: " + ex.ToString());
             ProjectData.ClearProjectError();
         }
-        return "";
     }
 
-    public object OrdenList()
+    /* obtiene data de expedicion con ot entregada */
+    public void SumAllOt(string ot)
     {
-        return "";
+        MessageBox.Show("ConsolidaOt.SumAllOt - ot " + ot);
+        foreach (DataReporteCalidad data in dataReporteCalidads)
+        {
+            if (data.Expedicion.Equals(ot) && data.Bultos > 1)
+            {
+                MessageBox.Show("ConsolidaOt.SumAllOt - valida expediocion " + data.Bultos);
+                /* agrega logica para cuando viene mas de un bulto */
+            }
+            else
+            {
+                AddPesoVol(Conversions.ToLong(data.Pvkilos));
+                MessageBox.Show("ConsolidaOt.SumAllOt - valida expediocion " + data.Expedicion + " pvkilo: " + data.Pvkilos);
+            }
+        }
     }
 
-    public object addListExpedicion() 
+    public void AddPesoVol(long NewPeso) 
     {
-        return "";
+        this.PesoVolumetrico += NewPeso;
+    }
+
+    public long GetPesoVolumetrico() 
+    { 
+        return this.PesoVolumetrico;
+    }
+
+    public void bultosOK(object listOp)
+    {
+        /* valida cantidad bultos se encuentra completa
+         * define logica para consulta cantidad de bultos esta completa
+         * */
+        foreach (DataReporteCalidad data in dataReporteCalidads)
+        {
+            MessageBox.Show("ConsolidaOt.bultosOK  ot : " + data.Expedicion);
+        }
     }
 
     public class DataReporteCalidad
