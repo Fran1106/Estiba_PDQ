@@ -15,25 +15,26 @@ public class ConsolidaOt
 {
     private NpgsqlCommand com;
     private NpgsqlDataReader read;
-    private string expedicion;
+    
+    List<DataReporteCalidad> dataReporteCalidads = new List<DataReporteCalidad>();
 
-    public object Consultar()
+    public object Consultar(string expedicion)
     {
         try
     {
-
         string query = "select * from  alerce.reporte_calidad where expedicion = " + expedicion;
 
             ModuleNpgSql.Conexion();
-
             com = new NpgsqlCommand(query, ModuleNpgSql.connNpg);
             read = com.ExecuteReader();
 
             while (read.Read())
-        {
-                int pvkilos = Convert.ToInt32(read["PVKILOS"]);
+            {
+                string pvkilos = Convert.ToString(read["PVKILOS"]);
                 int bultos = Convert.ToInt32(read["BULTOS"]);
                 Console.WriteLine("Data expedicion: " + expedicion + " pvkilos: " + pvkilos + " bultos: " + bultos);
+
+                dataReporteCalidads.Add(new DataReporteCalidad(expedicion,bultos,pvkilos,false) );
             }
         }
         catch (NpgsqlException ex)
@@ -51,8 +52,31 @@ public class ConsolidaOt
         return "";
     }
 
-
+    public object addListExpedicion() 
+    {
+        return "";
     }
+
+    public class DataReporteCalidad
+    {
+        public string Expedicion {get; set;}
+        public int Bultos { get; set; }
+        public string Pvkilos { get; set; }
+        public bool BultosOk { get; set; }
+
+        public DataReporteCalidad()
+        {
+        }
+
+        public DataReporteCalidad(string expedicion,int bultos, string pvkilos, bool bultosOk)
+        { 
+            this.Expedicion = expedicion; 
+            this.Bultos = bultos;  
+            this.Pvkilos = pvkilos; 
+            this.BultosOk = bultosOk;
+        }
+    }
+}
 
 
 

@@ -8,7 +8,7 @@ using System.Runtime.Versioning;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Sistema Estiba PDQ")]
-[assembly: AssemblyCopyright("Copyright ©  2023")]
+[assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("94f85af8-88cb-4ca5-9dd0-70b9895a98c5")]

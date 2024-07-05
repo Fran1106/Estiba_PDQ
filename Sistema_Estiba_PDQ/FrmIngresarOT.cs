@@ -23,7 +23,9 @@ public class FrmIngresarOT : Form
 {
 	private IContainer components;
 
-	[CompilerGenerated]
+    ConsolidaOt consolidaOt = new ConsolidaOt();
+
+    [CompilerGenerated]
 	[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 	[AccessedThroughProperty("BtnImprimir")]
 	private Button _BtnImprimir;
@@ -1234,7 +1236,7 @@ public class FrmIngresarOT : Form
 			byte[] bytImage = ms.ToArray();
 			ms.Close();
 			DgvIngresarOT.Rows.Add(TxtFolio.Text, TxtDestino2.Text, TxtCodigo2.Text, TxtOt.Text, TxtBulto.Text, TxtHora.Text, bytImage);
-		}
+        }
 		else
 		{
 			codigo_a_txt();
@@ -1246,7 +1248,8 @@ public class FrmIngresarOT : Form
 			ms2.Close();
 			DgvIngresarOT.Rows.Add(TxtFolio.Text, TxtDestino2.Text, TxtCodigo2.Text, TxtOt.Text, TxtBulto.Text, TxtHora.Text, bytImage2);
 		}
-	}
+        Console.WriteLine("Ingreso datos de capturador :", TxtFolio.Text, TxtDestino2.Text, TxtCodigo2.Text, TxtOt.Text, TxtBulto.Text, TxtHora.Text); 
+    }
 
 	private void BtnOperacion_Click(object sender, EventArgs e)
 	{
@@ -1301,9 +1304,16 @@ public class FrmIngresarOT : Form
 			MySqlCommand vCmd = new MySqlCommand(vSql, ModuleDB.vConn);
 			vCmd.ExecuteNonQuery();
 			ModuleDB.Desconectar();
+
+			consolidaOt.Consultar(OT);
+
 		}
 		string conteo = Conversions.ToString(DgvIngresarOT.RowCount);
 		Interaction.MsgBox("Registros Guardados - El Total De Registros Es: " + conteo, MsgBoxStyle.Information, ":: PDQ :::");
+
+		// AQUI OBTENEMOS OT PARA CONSULTA PESO VOLUMETRICO
+		MessageBox.Show(Conversions.ToString(DgvIngresarOT.RowCount));
+
 		ordenar_datos();
 	}
 
@@ -1318,7 +1328,7 @@ public class FrmIngresarOT : Form
 			for (int i = 0; i <= num; i++)
 			{
 				dt.Rows.Add(DgvIngresarOT.Rows[i].Cells["DESTINO"].Value, DgvIngresarOT.Rows[i].Cells["CODIGO"].Value, DgvIngresarOT.Rows[i].Cells["OT"].Value, DgvIngresarOT.Rows[i].Cells["NBULTO"].Value, DgvIngresarOT.Rows[i].Cells["HORA"].Value, DgvIngresarOT.Rows[i].Cells["BARCODE"].Value);
-			}
+            }
 			LocalReport localReport = MyProject.Forms.FrmReporteOT.ReportViewer1.LocalReport;
 			localReport.ReportPath = "ReporteOT.rdlc";
 			localReport.DataSources.Clear();
@@ -1326,7 +1336,7 @@ public class FrmIngresarOT : Form
 			localReport = null;
 			MyProject.Forms.FrmReporteOT.ShowDialog();
 			MyProject.Forms.FrmReporteOT.ReportViewer1.RefreshReport();
-			limpiar_cajas();
+            limpiar_cajas();
 		}
 	}
 
