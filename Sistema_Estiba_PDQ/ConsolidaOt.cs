@@ -10,7 +10,7 @@ using Microsoft.VisualBasic.CompilerServices;
 
 
 namespace Sistema_Estiba_PDQ;
-    
+
 public class ConsolidaOt
 {
     private NpgsqlCommand com;
@@ -20,8 +20,9 @@ public class ConsolidaOt
     public object Consultar()
     {
         try
-        {
-            string query = "select * from  alerce.reporte_calidad where expedicion = " + expedicion;
+    {
+
+        string query = "select * from  alerce.reporte_calidad where expedicion = " + expedicion;
 
             ModuleNpgSql.Conexion();
 
@@ -29,7 +30,7 @@ public class ConsolidaOt
             read = com.ExecuteReader();
 
             while (read.Read())
-            {
+        {
                 int pvkilos = Convert.ToInt32(read["PVKILOS"]);
                 int bultos = Convert.ToInt32(read["BULTOS"]);
                 Console.WriteLine("Data expedicion: " + expedicion + " pvkilos: " + pvkilos + " bultos: " + bultos);
@@ -51,7 +52,7 @@ public class ConsolidaOt
     }
 
 
-}
+    }
 
 
 
