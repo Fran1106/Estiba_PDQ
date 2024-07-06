@@ -1248,8 +1248,7 @@ public class FrmIngresarOT : Form
 			ms2.Close();
 			DgvIngresarOT.Rows.Add(TxtFolio.Text, TxtDestino2.Text, TxtCodigo2.Text, TxtOt.Text, TxtBulto.Text, TxtHora.Text, bytImage2);
 		}
-        consolidaOt.Consultar(TxtOt.Text);
-        MessageBox.Show("FrmIngresarOT.BtnAgregar_Click capturadora anrtes de consultar --> ot " + TxtOt.Text);
+        consolidaOt.ConsultarExpedicion(TxtOt.Text);
     }
 
 	private void BtnOperacion_Click(object sender, EventArgs e)
@@ -1330,19 +1329,18 @@ public class FrmIngresarOT : Form
 			localReport.DataSources.Clear();
 			localReport.DataSources.Add(new ReportDataSource("OTDataset", dt));
 			localReport = null;
-			MyProject.Forms.FrmReporteOT.ShowDialog();
-			MyProject.Forms.FrmReporteOT.ReportViewer1.RefreshReport();
 
-			/*
-			 calcula pvkilos
+            /*
+			  obtiene peso voulmetrico antes de pagina de imprimir
+				genera logica para pasar informacion a la pagina de imprimir
 			 */
-			MessageBox.Show("FrmIngresarOT.imprimir_reporte : previo bultosOK");
-            consolidaOt.bultosOK("");
+            MessageBox.Show("FrmIngresarOT.imprimir_reporte peso vilumetrico obtenido total : " + consolidaOt.GetPesoVolumetrico());
 
+
+            MyProject.Forms.FrmReporteOT.ShowDialog();
+			MyProject.Forms.FrmReporteOT.ReportViewer1.RefreshReport();
             limpiar_cajas();
 		}
-
-        MessageBox.Show("FrmIngresarOT.imprimir_reporte fuera checked");
     }
 
 	private void DgvIngresarOT_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

@@ -20,7 +20,7 @@ public class ConsolidaOt
     List<DataReporteCalidad> dataReporteCalidads = new List<DataReporteCalidad>();
     long PesoVolumetrico = 0L;
 
-    public void Consultar(string expedicion)
+    public void ConsultarExpedicion(string expedicion)
     {
         try
         {
@@ -30,12 +30,14 @@ public class ConsolidaOt
             com = new NpgsqlCommand(query, ModuleNpgSql.connNpg);
             read = com.ExecuteReader();
 
-            while (read.Read())
+             while (read.Read())
             {
                 string pvkilos = Convert.ToString(read["PVKILOS"]);
                 int bultos = Convert.ToInt32(read["BULTOS"]);
                 dataReporteCalidads.Add(new DataReporteCalidad(expedicion,bultos,pvkilos,false) );
             }
+
+            ModuleNpgSql.Desconection();
         }
         catch (NpgsqlException ex)
         {
@@ -49,7 +51,6 @@ public class ConsolidaOt
     /* obtiene data de expedicion con ot entregada */
     public void SumAllOt(string ot)
     {
-        MessageBox.Show("ConsolidaOt.SumAllOt - ot " + ot);
         foreach (DataReporteCalidad data in dataReporteCalidads)
         {
             if (data.Expedicion.Equals(ot) && data.Bultos > 1)
@@ -60,7 +61,7 @@ public class ConsolidaOt
             else
             {
                 AddPesoVol(Conversions.ToLong(data.Pvkilos));
-                MessageBox.Show("ConsolidaOt.SumAllOt - valida expediocion " + data.Expedicion + " pvkilo: " + data.Pvkilos);
+                break;
             }
         }
     }
