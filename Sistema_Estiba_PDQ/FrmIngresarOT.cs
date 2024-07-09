@@ -1248,7 +1248,7 @@ public class FrmIngresarOT : Form
 			ms2.Close();
 			DgvIngresarOT.Rows.Add(TxtFolio.Text, TxtDestino2.Text, TxtCodigo2.Text, TxtOt.Text, TxtBulto.Text, TxtHora.Text, bytImage2);
 		}
-        consolidaOt.ConsultarExpedicion(TxtOt.Text);
+        consolidaOt.ConsultarExpedicion(TxtOt.Text, Convert.ToInt32(TxtBulto.Text));
     }
 
 	private void BtnOperacion_Click(object sender, EventArgs e)
