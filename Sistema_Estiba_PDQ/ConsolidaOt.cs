@@ -82,7 +82,9 @@ public class ConsolidaOt
 
             if (!dataReporteCalidad.BultosOk) 
             {
-                MessageBox.Show("Para la Ot :"+ dataReporteCalidad.Expedicion+" Faltan ingresar : "+ (dataReporteCalidad.Bultos-dataReporteCalidad.Nbultos.Count));
+                MessageBox.Show("Falta ingresar : "+ (dataReporteCalidad.Bultos-dataReporteCalidad.Nbultos.Count) + 
+                    ((dataReporteCalidad.Bultos - dataReporteCalidad.Nbultos.Count)>1 ?" Bultos ":" Bulto ")
+                    +"para la Ot : "+ dataReporteCalidad.Expedicion);
                 return false;
             }
         }
