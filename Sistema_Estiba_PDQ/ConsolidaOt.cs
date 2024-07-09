@@ -9,7 +9,6 @@ using Npgsql;
 using Microsoft.VisualBasic.CompilerServices;
 using Microsoft.VisualBasic.Logging;
 
-
 namespace Sistema_Estiba_PDQ;
 
 public class ConsolidaOt
@@ -63,7 +62,6 @@ public class ConsolidaOt
         }
     }
 
-    /* obtiene data de expedicion con ot entregada */
     public void SumAllOt(string ot)
     {
         DataReporteCalidad dataReporteCalidad = (DataReporteCalidad)dataHashOt[ot];
@@ -75,6 +73,22 @@ public class ConsolidaOt
         }
     }
 
+    public bool ValidaExpedicionesCompleta()
+    {
+        ICollection keys = dataHashOt.Keys;
+        foreach (string key in keys)
+        {
+            DataReporteCalidad dataReporteCalidad = (DataReporteCalidad)dataHashOt[key];
+
+            if (!dataReporteCalidad.BultosOk) 
+            {
+                MessageBox.Show("Para la Ot :"+ dataReporteCalidad.Expedicion+" Faltan ingresar : "+ (dataReporteCalidad.Bultos-dataReporteCalidad.Nbultos.Count));
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void AddPesoVol(long NewPeso)
     {
         this.PesoVolumetrico += NewPeso;
@@ -83,27 +97,19 @@ public class ConsolidaOt
     public void EvalExpedicionExistente(string Ot, int Nbulto)
     {
         DataReporteCalidad dataReporteCalidad = (DataReporteCalidad)this.dataHashOt[Ot];
-        List<int> ListaBultos = dataReporteCalidad.Nbultos;
         int TotalBultos = dataReporteCalidad.Bultos;
 
-        // ordenar eliminar repetidos
-        if (!listaNbulto.Contains(Nbulto))
-        { 
-            listaNbulto.Add(Nbulto);
-            listaNbulto.Sort();
-            dataReporteCalidad.Nbultos = listaNbulto;
+        if (!dataReporteCalidad.Nbultos.Contains(Nbulto))
+        {
+            dataReporteCalidad.Nbultos.Add(Nbulto);
+            dataReporteCalidad.Nbultos.Sort();
         }
 
-        if (listaNbulto.Count.Equals(TotalBultos))
+        if (dataReporteCalidad.Nbultos.Count.Equals(TotalBultos))
         {
             dataReporteCalidad.BultosOk = true;
         }
         dataHashOt[Ot] = dataReporteCalidad;
-    }
-
-    public bool EvaluaBultos() 
-    {
-        return false;
     }
 
     public long GetPesoVolumetrico() 

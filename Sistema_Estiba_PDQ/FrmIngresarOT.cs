@@ -1291,7 +1291,7 @@ public class FrmIngresarOT : Form
 
 	private void guardar_detalles()
 	{
-		foreach (DataGridViewRow Row in (IEnumerable)DgvIngresarOT.Rows)
+        foreach (DataGridViewRow Row in (IEnumerable)DgvIngresarOT.Rows)
 		{
 			string Folio = Conversions.ToString(Row.Cells["Folio"].Value);
 			string Destino = Conversions.ToString(Row.Cells["Destino"].Value);
@@ -1299,12 +1299,12 @@ public class FrmIngresarOT : Form
 			string Ot = Conversions.ToString(Row.Cells["OT"].Value);
 			string Nbulto = Conversions.ToString(Row.Cells["NBulto"].Value);
 			string Hora = Conversions.ToString(Row.Cells["Hora"].Value);
-			ModuleDB.Conectar();
+
+            ModuleDB.Conectar();
 			string vSql = "Insert into tbl_detalles (folio,destino,codigo,ot,bulto,hora) values ('" + Folio + "', '" + Destino + "', '" + Codigo + "', '" + Ot + "', '" + Nbulto + "', '" + Hora + "')";
 			MySqlCommand vCmd = new MySqlCommand(vSql, ModuleDB.vConn);
 			vCmd.ExecuteNonQuery();
 			ModuleDB.Desconectar();
-
             consolidaOt.SumAllOt(Ot);
         }
 		string conteo = Conversions.ToString(DgvIngresarOT.RowCount);
@@ -1359,9 +1359,14 @@ public class FrmIngresarOT : Form
 	}
 
 	private void BtnImprimir_Click(object sender, EventArgs e)
-	{
+	{   
+        if (!consolidaOt.ValidaExpedicionesCompleta()) 
+		{
+            TxtPistolear.Focus();
+            return; 
+		}
 		guardar_detalles();
-		imprimir_reporte();
+        imprimir_reporte();
 		Close();
 	}
 }
