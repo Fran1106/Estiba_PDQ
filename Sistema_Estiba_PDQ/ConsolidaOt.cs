@@ -17,8 +17,8 @@ public class ConsolidaOt
     private NpgsqlCommand com;
     private NpgsqlDataReader read;
     
-    List<DataReporteCalidad> dataReporteCalidads = new List<DataReporteCalidad>();
-    long PesoVolumetrico = 0L;
+    private List<DataReporteCalidad> dataReporteCalidads = new List<DataReporteCalidad>();
+    private long PesoVolumetrico = 0L;
 
     public void ConsultarExpedicion(string expedicion)
     {
@@ -56,6 +56,7 @@ public class ConsolidaOt
             if (data.Expedicion.Equals(ot) && data.Bultos > 1)
             {
                 MessageBox.Show("ConsolidaOt.SumAllOt - valida expediocion " + data.Bultos);
+                break;
                 /* agrega logica para cuando viene mas de un bulto */
             }
             else
@@ -76,7 +77,7 @@ public class ConsolidaOt
         return this.PesoVolumetrico;
     }
 
-    public void bultosOK(object listOp)
+    public void NbultosOK(object listOp)
     {
         /* valida cantidad bultos se encuentra completa
          * define logica para consulta cantidad de bultos esta completa
@@ -92,6 +93,7 @@ public class ConsolidaOt
         public string Expedicion {get; set;}
         public int Bultos { get; set; }
         public string Pvkilos { get; set; }
+
         public bool BultosOk { get; set; }
 
         public DataReporteCalidad()

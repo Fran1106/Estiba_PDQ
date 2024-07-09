@@ -22,7 +22,6 @@ namespace Sistema_Estiba_PDQ;
 public class FrmIngresarOT : Form
 {
 	private IContainer components;
-
     ConsolidaOt consolidaOt = new ConsolidaOt();
 
     [CompilerGenerated]
@@ -143,7 +142,7 @@ public class FrmIngresarOT : Form
 		set;
 	}
 
-	[field: AccessedThroughProperty("Label5")]
+    [field: AccessedThroughProperty("Label5")]
 	internal virtual Label Label5
 	{
 		get; [MethodImpl(MethodImplOptions.Synchronized)]
@@ -170,6 +169,7 @@ public class FrmIngresarOT : Form
 		get; [MethodImpl(MethodImplOptions.Synchronized)]
 		set;
 	}
+
 
 	internal virtual Button BtnImprimir
 	{
@@ -359,7 +359,7 @@ public class FrmIngresarOT : Form
 		set;
 	}
 
-	[field: AccessedThroughProperty("Label14")]
+    [field: AccessedThroughProperty("Label14")]
 	internal virtual Label Label14
 	{
 		get; [MethodImpl(MethodImplOptions.Synchronized)]
@@ -971,7 +971,7 @@ public class FrmIngresarOT : Form
 		TxtDestino.Text = EnviarDatos.destino;
 		TxtRampla.Text = EnviarDatos.rampla;
 		TxtFecha.Text = EnviarDatos.fecha;
-	}
+    }
 
 	private void codigo_sucursal()
 	{
@@ -1323,20 +1323,14 @@ public class FrmIngresarOT : Form
 			for (int i = 0; i <= num; i++)
 			{
 				dt.Rows.Add(DgvIngresarOT.Rows[i].Cells["DESTINO"].Value, DgvIngresarOT.Rows[i].Cells["CODIGO"].Value, DgvIngresarOT.Rows[i].Cells["OT"].Value, DgvIngresarOT.Rows[i].Cells["NBULTO"].Value, DgvIngresarOT.Rows[i].Cells["HORA"].Value, DgvIngresarOT.Rows[i].Cells["BARCODE"].Value);
-            }
+			}
 			LocalReport localReport = MyProject.Forms.FrmReporteOT.ReportViewer1.LocalReport;
 			localReport.ReportPath = "ReporteOT.rdlc";
 			localReport.DataSources.Clear();
 			localReport.DataSources.Add(new ReportDataSource("OTDataset", dt));
-			localReport = null;
-
-            /*
-			  obtiene peso voulmetrico antes de pagina de imprimir
-				genera logica para pasar informacion a la pagina de imprimir
-			 */
-            MessageBox.Show("FrmIngresarOT.imprimir_reporte peso vilumetrico obtenido total : " + consolidaOt.GetPesoVolumetrico());
-
-
+			var parameters = new[] { new ReportParameter("PesoVolumetrico", Conversions.ToString(consolidaOt.GetPesoVolumetrico()))};
+            localReport.SetParameters(parameters);
+       		localReport = null;
             MyProject.Forms.FrmReporteOT.ShowDialog();
 			MyProject.Forms.FrmReporteOT.ReportViewer1.RefreshReport();
             limpiar_cajas();

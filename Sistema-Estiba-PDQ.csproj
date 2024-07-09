@@ -14,12 +14,13 @@
   <PropertyGroup>
     <ApplicationIcon>app.ico</ApplicationIcon>
     <RootNamespace />
+    <StartupObject>Sistema_Estiba_PDQ.My.MyApplication</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Sistema_Estiba_PDQ.ReporteOT.rdlc" />
+    <None Remove="ReporteOT.rdlc" />
     <None Remove="Sistema_Estiba_PDQ.ReporteRespaldo.rdlc" />
-    <None Remove="Sistema_Estiba_PDQ.ReporteUsuarios.rdlc" />
-    <EmbeddedResource Include="Sistema_Estiba_PDQ.ReporteOT.rdlc" LogicalName="Sistema_Estiba_PDQ.ReporteOT.rdlc" />
+    <None Remove="ReporteUsuarios.rdlc" />
+    <EmbeddedResource Include="Sistema_Estiba_PDQ.ReporteOT.rdlc" LogicalName="ReporteOT.rdlc" />
     <EmbeddedResource Include="Sistema_Estiba_PDQ.ReporteRespaldo.rdlc" LogicalName="Sistema_Estiba_PDQ.ReporteRespaldo.rdlc" />
     <EmbeddedResource Include="Sistema_Estiba_PDQ.ReporteUsuarios.rdlc" LogicalName="Sistema_Estiba_PDQ.ReporteUsuarios.rdlc" />
   </ItemGroup>
