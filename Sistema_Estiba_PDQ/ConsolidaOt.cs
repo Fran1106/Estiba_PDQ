@@ -67,9 +67,11 @@ public class ConsolidaOt
     public void SumAllOt(string ot)
     {
         DataReporteCalidad dataReporteCalidad = (DataReporteCalidad)dataHashOt[ot];
-        if (dataReporteCalidad.BultosOk)
-        {   
-          AddPesoVol(Conversions.ToLong(dataReporteCalidad.Pvkilos));
+        if (dataReporteCalidad.BultosOk && !dataReporteCalidad.PrintOK)
+        {
+            dataReporteCalidad.PrintOK = true;
+            dataHashOt[ot] = dataReporteCalidad;
+            AddPesoVol(Conversions.ToLong(dataReporteCalidad.Pvkilos));
         }
     }
 
@@ -89,15 +91,14 @@ public class ConsolidaOt
         { 
             listaNbulto.Add(Nbulto);
             listaNbulto.Sort();
-            dataReporteCalidad.SetBultos(listaNbulto);
+            dataReporteCalidad.Nbultos = listaNbulto;
         }
 
         if (listaNbulto.Count.Equals(TotalBultos))
         {
             dataReporteCalidad.BultosOk = true;
         }
-            dataHashOt.Remove(Ot);
-            dataHashOt.Add(Ot, dataReporteCalidad);
+        dataHashOt[Ot] = dataReporteCalidad;
     }
 
     public bool EvaluaBultos() 
@@ -117,6 +118,7 @@ public class ConsolidaOt
         public string Pvkilos { get; set; }
         public bool BultosOk { get; set; }
         public List<int> Nbultos { get; set;}
+        public bool PrintOK { get; set; }
 
         public DataReporteCalidad()
         {
@@ -129,11 +131,7 @@ public class ConsolidaOt
             this.Pvkilos = pvkilos; 
             this.BultosOk = bultosOk;
             this.Nbultos = nbultos;
-        }
-
-        internal void SetBultos(List<int> NbultnosParam)
-        {
-            this.Nbultos = NbultnosParam;
+            this.PrintOK = false;
         }
     }
 }
