@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Npgsql;
 using Microsoft.VisualBasic.CompilerServices;
 using Microsoft.VisualBasic.Logging;
+using Microsoft.VisualBasic;
 
 namespace Sistema_Estiba_PDQ;
 
@@ -82,9 +83,9 @@ public class ConsolidaOt
 
             if (!dataReporteCalidad.BultosOk) 
             {
-                MessageBox.Show("Falta ingresar : "+ (dataReporteCalidad.Bultos-dataReporteCalidad.Nbultos.Count) + 
+                Interaction.MsgBox("Falta ingresar : "+ (dataReporteCalidad.Bultos-dataReporteCalidad.Nbultos.Count) + 
                     ((dataReporteCalidad.Bultos - dataReporteCalidad.Nbultos.Count)>1 ?" Bultos ":" Bulto ")
-                    +"para la Ot : "+ dataReporteCalidad.Expedicion);
+                    +"para la Ot : "+ dataReporteCalidad.Expedicion, MsgBoxStyle.Information, ":: PDQ :::");
                 return false;
             }
         }

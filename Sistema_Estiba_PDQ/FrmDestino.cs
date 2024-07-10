@@ -470,14 +470,14 @@ public class FrmDestino : Form
 		}
 		try
 		{
-			string vSql = "INSERT INTO tbl_datos (folio,usuario,destino,rampla,fecha) VALUES (@folio,@usuario,@destino,@rampla,@fecha)";
+			string vSql = "INSERT INTO tbl_datos (folio,usuario,destino,rampla,fecha,hora) VALUES (@folio,@usuario,@destino,@rampla,@fecha,current_timestamp())";
 			MySqlCommand vCmd = new MySqlCommand(vSql, ModuleDB.vConn);
 			vCmd.Parameters.AddWithValue("folio", TxtFolio.Text.Trim());
 			vCmd.Parameters.AddWithValue("usuario", TxtUsuario.Text.Trim());
 			vCmd.Parameters.AddWithValue("destino", TxtDestino.Text);
 			vCmd.Parameters.AddWithValue("rampla", TxtRampla.Text);
 			vCmd.Parameters.AddWithValue("fecha", TxtFecha.Text.Trim());
-			vCmd.ExecuteNonQuery();
+            vCmd.ExecuteNonQuery();
 			ModuleDB.Desconectar();
 			Enviar_Datos();
 			MyProject.Forms.FrmIngresarOT.ShowDialog();

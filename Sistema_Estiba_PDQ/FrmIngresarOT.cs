@@ -1248,9 +1248,12 @@ public class FrmIngresarOT : Form
 			ms2.Close();
 			DgvIngresarOT.Rows.Add(TxtFolio.Text, TxtDestino2.Text, TxtCodigo2.Text, TxtOt.Text, TxtBulto.Text, TxtHora.Text, bytImage2);
 		}
+		GuardaOperacionTbl(TxtFolio.Text, TxtDestino2.Text, TxtCodigo2.Text, TxtOt.Text, TxtBulto.Text, TxtHora.Text);
         consolidaOt.ConsultarExpedicion(TxtOt.Text, Convert.ToInt32(TxtBulto.Text));
+        consolidaOt.SumAllOt(TxtOt.Text);
     }
 
+	// Metodo que se accede al ingresar Operacion
 	private void BtnOperacion_Click(object sender, EventArgs e)
 	{
 		if (TxtPistolear.TextLength == 22)
@@ -1287,27 +1290,20 @@ public class FrmIngresarOT : Form
 			TxtPistolear.Clear();
 			TxtPistolear.Focus();
 		}
-	}
+    }
+
+	private void GuardaOperacionTbl(string Folio, string Destino, string Codigo, string Ot, string Nbulto, string Hora) 
+	{
+		ModuleDB.Conectar();
+		string vSql = "Insert into tbl_detalles (folio,destino,codigo,ot,bulto,hora) values ('" + Folio + "', '" + Destino + "', '" + Codigo + "', '" + Ot + "', '" + Nbulto + "', '" + Hora + "')";
+		MySqlCommand vCmd = new MySqlCommand(vSql, ModuleDB.vConn);
+		vCmd.ExecuteNonQuery();
+		ModuleDB.Desconectar();
+    }
 
 	private void guardar_detalles()
 	{
-        foreach (DataGridViewRow Row in (IEnumerable)DgvIngresarOT.Rows)
-		{
-			string Folio = Conversions.ToString(Row.Cells["Folio"].Value);
-			string Destino = Conversions.ToString(Row.Cells["Destino"].Value);
-			string Codigo = Conversions.ToString(Row.Cells["Codigo"].Value);
-			string Ot = Conversions.ToString(Row.Cells["OT"].Value);
-			string Nbulto = Conversions.ToString(Row.Cells["NBulto"].Value);
-			string Hora = Conversions.ToString(Row.Cells["Hora"].Value);
-
-            ModuleDB.Conectar();
-			string vSql = "Insert into tbl_detalles (folio,destino,codigo,ot,bulto,hora) values ('" + Folio + "', '" + Destino + "', '" + Codigo + "', '" + Ot + "', '" + Nbulto + "', '" + Hora + "')";
-			MySqlCommand vCmd = new MySqlCommand(vSql, ModuleDB.vConn);
-			vCmd.ExecuteNonQuery();
-			ModuleDB.Desconectar();
-            consolidaOt.SumAllOt(Ot);
-        }
-		string conteo = Conversions.ToString(DgvIngresarOT.RowCount);
+    	string conteo = Conversions.ToString(DgvIngresarOT.RowCount);
 		Interaction.MsgBox("Registros Guardados - El Total De Registros Es: " + conteo, MsgBoxStyle.Information, ":: PDQ :::");
 		ordenar_datos();
 	}
