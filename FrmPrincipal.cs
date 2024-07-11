@@ -1,13 +1,11 @@
-using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.Runtime.CompilerServices;
-using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 using Sistema_Estiba_PDQ.My;
-using Sistema_Estiba_PDQ.My.Resources;
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 
 namespace Sistema_Estiba_PDQ;
 
@@ -346,7 +344,7 @@ public class FrmPrincipal : Form
 		this.IngresarOTToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
 		this.IngresarOTToolStripMenuItem.Size = new System.Drawing.Size(98, 24);
 		this.IngresarOTToolStripMenuItem.Text = "Ingresar OT";
-		this.ConfiguraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[5] { this.ReportesToolStripMenuItem, this.ToolStripSeparator1, this.UsuariosToolStripMenuItem, this.ToolStripSeparator3, this.RespaldoToolStripMenuItem });
+        this.ConfiguraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[5] { this.ReportesToolStripMenuItem, this.ToolStripSeparator1, this.UsuariosToolStripMenuItem, this.ToolStripSeparator3, this.RespaldoToolStripMenuItem });
 		this.ConfiguraciónToolStripMenuItem.Image = Sistema_Estiba_PDQ.My.Resources.Resources.Ico_Config;
 		this.ConfiguraciónToolStripMenuItem.Name = "ConfiguraciónToolStripMenuItem";
 		this.ConfiguraciónToolStripMenuItem.Size = new System.Drawing.Size(115, 24);

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <AssemblyName>Sistema Estiba PDQ</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net472</TargetFramework>
+    <Prefer32Bit>True</Prefer32Bit>
+    <LangVersion>11.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+	<RootNamespace>Sistema_Estiba_PDQ</RootNamespace>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <StartupObject>Sistema_Estiba_PDQ.My.MyApplication</StartupObject>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseWinFormsOutOfProcDesigner>True</UseWinFormsOutOfProcDesigner>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="MySql.Data">
+      <HintPath>lib\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing">
+      <HintPath>lib\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="Microsoft.ReportViewer.WinForms">
+		<HintPath>lib\Microsoft.ReportViewer.WinForms.dll</HintPath>      
+    </Reference>
+	<Reference Include="Microsoft.SqlServer">
+      <HintPath>lib\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.0.0" />
+    <PackageReference Include="Npgsql" Version="8.0.3" />
+  </ItemGroup>
+  <ItemGroup>		
+		<EmbeddedResource Include="ReporteRespaldo.rdlc" />
+		<EmbeddedResource Include="ReporteUsuarios.rdlc" />
+	</ItemGroup>
+  <ItemGroup>
+       <Resource Include="ReporteOT.rdlc">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+</Project>
