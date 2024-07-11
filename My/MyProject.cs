@@ -59,7 +59,10 @@ internal sealed class MyProject
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public FrmUsuarios m_FrmUsuarios;
 
-		public FrmAcercaDe FrmAcercaDe
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public FrmContinuarOT m_FrmContinuarOT;
+
+        public FrmAcercaDe FrmAcercaDe
 		{
 			[DebuggerHidden]
 			get
@@ -103,7 +106,7 @@ internal sealed class MyProject
 			}
 		}
 
-		public FrmIngresarOT FrmIngresarOT
+        public FrmIngresarOT FrmIngresarOT
 		{
 			[DebuggerHidden]
 			get
@@ -125,7 +128,29 @@ internal sealed class MyProject
 			}
 		}
 
-		public FrmLogin FrmLogin
+        public FrmContinuarOT FrmContinuarOT
+        {
+            [DebuggerHidden]
+            get
+            {
+                m_FrmContinuarOT = Create__Instance__(m_FrmContinuarOT);
+                return m_FrmContinuarOT;
+            }
+            [DebuggerHidden]
+            set
+            {
+                if (value != m_FrmContinuarOT)
+                {
+                    if (value != null)
+                    {
+                        throw new ArgumentException("Property can only be set to Nothing");
+                    }
+                    Dispose__Instance__(ref m_FrmContinuarOT);
+                }
+            }
+        }
+
+        public FrmLogin FrmLogin
 		{
 			[DebuggerHidden]
 			get

@@ -1,5 +1,6 @@
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
+using Microsoft.VisualBasic.Devices;
 using Sistema_Estiba_PDQ.My;
 using System;
 using System.ComponentModel;
@@ -19,7 +20,12 @@ public class FrmPrincipal : Form
 	[AccessedThroughProperty("IngresarOTToolStripMenuItem")]
 	private ToolStripMenuItem _IngresarOTToolStripMenuItem;
 
-	[CompilerGenerated]
+    [CompilerGenerated]
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    [AccessedThroughProperty("ContinuarOTToolStripMenuItem")]
+    private ToolStripMenuItem _ContinuarOTToolStripMenuItem;
+
+    [CompilerGenerated]
 	[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 	[AccessedThroughProperty("UsuariosToolStripMenuItem")]
 	private ToolStripMenuItem _UsuariosToolStripMenuItem;
@@ -81,15 +87,48 @@ public class FrmPrincipal : Form
 			}
 		}
 	}
+    internal virtual ToolStripMenuItem ContinuarOTToolStripMenuItem
+    {
+        [CompilerGenerated]
+        get
+        {
+            return _ContinuarOTToolStripMenuItem;
+        }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        [CompilerGenerated]
+        set
+        {
+            EventHandler value2 = ContinuarOTToolStripMenuItem_Click;
+            ToolStripMenuItem continuarOTToolStripMenuItem = _ContinuarOTToolStripMenuItem;
+            if (continuarOTToolStripMenuItem != null)
+            {
+                continuarOTToolStripMenuItem.Click -= value2;
+            }
+            _ContinuarOTToolStripMenuItem = value;
+            continuarOTToolStripMenuItem = _ContinuarOTToolStripMenuItem;
+            if (continuarOTToolStripMenuItem != null)
+            {
+                continuarOTToolStripMenuItem.Click += value2;
+            }
+        }
+    }
 
-	[field: AccessedThroughProperty("ConfiguraciónToolStripMenuItem")]
+    [field: AccessedThroughProperty("ConfiguraciónToolStripMenuItem")]
 	internal virtual ToolStripMenuItem ConfiguraciónToolStripMenuItem
 	{
 		get; [MethodImpl(MethodImplOptions.Synchronized)]
 		set;
 	}
 
-	[field: AccessedThroughProperty("ReportesToolStripMenuItem")]
+
+    [field: AccessedThroughProperty("ConfiguraciónToolStripMenuItem2")]
+    internal virtual ToolStripMenuItem ConfiguraciónToolStripMenuItem2
+    {
+        get; [MethodImpl(MethodImplOptions.Synchronized)]
+        set;
+    }
+
+    [field: AccessedThroughProperty("ReportesToolStripMenuItem")]
 	internal virtual ToolStripMenuItem ReportesToolStripMenuItem
 	{
 		get; [MethodImpl(MethodImplOptions.Synchronized)]
@@ -315,7 +354,8 @@ public class FrmPrincipal : Form
 		System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Sistema_Estiba_PDQ.FrmPrincipal));
 		this.MenuStrip1 = new System.Windows.Forms.MenuStrip();
 		this.IngresarOTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-		this.ConfiguraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        this.ContinuarOTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        this.ConfiguraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 		this.ReportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 		this.UsuariosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 		this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -332,23 +372,32 @@ public class FrmPrincipal : Form
 		((System.ComponentModel.ISupportInitialize)this.PictureBox1).BeginInit();
 		base.SuspendLayout();
 		this.MenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-		this.MenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[3] { this.IngresarOTToolStripMenuItem, this.ConfiguraciónToolStripMenuItem, this.AyudaToolStripMenuItem });
+		this.MenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[4] {this.IngresarOTToolStripMenuItem, this.ContinuarOTToolStripMenuItem, this.ConfiguraciónToolStripMenuItem, this.AyudaToolStripMenuItem });
 		this.MenuStrip1.Location = new System.Drawing.Point(0, 0);
 		this.MenuStrip1.Name = "MenuStrip1";
 		this.MenuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
 		this.MenuStrip1.Size = new System.Drawing.Size(843, 28);
 		this.MenuStrip1.TabIndex = 0;
 		this.MenuStrip1.Text = "MenuStrip1";
+
 		this.IngresarOTToolStripMenuItem.Image = Sistema_Estiba_PDQ.My.Resources.Resources.Ico_Ingresar;
 		this.IngresarOTToolStripMenuItem.Name = "IngresarOTToolStripMenuItem";
 		this.IngresarOTToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
 		this.IngresarOTToolStripMenuItem.Size = new System.Drawing.Size(98, 24);
 		this.IngresarOTToolStripMenuItem.Text = "Ingresar OT";
+
+        this.ContinuarOTToolStripMenuItem.Image = Sistema_Estiba_PDQ.My.Resources.Resources.Ico_Ingresar;
+        this.ContinuarOTToolStripMenuItem.Name = "ContinuarOTToolStripMenuItem";
+        this.ContinuarOTToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+        this.ContinuarOTToolStripMenuItem.Size = new System.Drawing.Size(98, 24);
+        this.ContinuarOTToolStripMenuItem.Text = "Continuar OT";
+
         this.ConfiguraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[5] { this.ReportesToolStripMenuItem, this.ToolStripSeparator1, this.UsuariosToolStripMenuItem, this.ToolStripSeparator3, this.RespaldoToolStripMenuItem });
 		this.ConfiguraciónToolStripMenuItem.Image = Sistema_Estiba_PDQ.My.Resources.Resources.Ico_Config;
 		this.ConfiguraciónToolStripMenuItem.Name = "ConfiguraciónToolStripMenuItem";
 		this.ConfiguraciónToolStripMenuItem.Size = new System.Drawing.Size(115, 24);
 		this.ConfiguraciónToolStripMenuItem.Text = "Configuración";
+
 		this.ReportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[3] { this.UsuariosToolStripMenuItem1, this.ToolStripSeparator2, this.OTToolStripMenuItem });
 		this.ReportesToolStripMenuItem.Image = Sistema_Estiba_PDQ.My.Resources.Resources.Ico_Informe;
 		this.ReportesToolStripMenuItem.Name = "ReportesToolStripMenuItem";
@@ -456,7 +505,12 @@ public class FrmPrincipal : Form
 		MyProject.Forms.FrmDestino.ShowDialog();
 	}
 
-	private void OTToolStripMenuItem_Click(object sender, EventArgs e)
+    private void ContinuarOTToolStripMenuItem_Click(object sender, EventArgs e)
+    {   
+        MyProject.Forms.FrmContinuarOT.ShowDialog();
+    }
+
+    private void OTToolStripMenuItem_Click(object sender, EventArgs e)
 	{
 		MyProject.Forms.FrmRegistrosOT.ShowDialog();
 	}
