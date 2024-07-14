@@ -16,4 +16,8 @@ internal sealed class EnviarDatos
 	public static string fecha;
 
 	public static string folio;
+
+    public static string hora;
+
+    public static string id;
 }

@@ -939,7 +939,7 @@ public class FrmContinuarOT : Form
     private void Mostrar_Datos()
     {
         ModuleDB.Conectar();
-        string vSql = "select *  from tbl_datos where usuario = \'fdaine\'\nand date_format(STR_TO_DATE(fecha, \'%d/%m/%Y\'),\'%Y-%m-%d\') = date_format(curdate()-4,\'%Y-%m-%d\')\norder by hora desc";
+        string vSql = "select *  from tbl_datos where usuario = \'" + EnviarDatos.login + "\'\n and date_format(STR_TO_DATE(fecha, \'%d/%m/%Y\'),\'%Y-%m-%d\') = date_format(curdate()-5,\'%Y-%m-%d\')\norder by hora desc";
         MySqlCommand vCmd = new MySqlCommand(vSql, ModuleDB.vConn);
         MySqlDataReader vReader = vCmd.ExecuteReader();
         DgvDatos.Rows.Clear();
@@ -1001,31 +1001,23 @@ public class FrmContinuarOT : Form
 
     private void BtnContinuar_Click(object sender, EventArgs e)
     {
-        /*  checked
-          {
-              if (DgvDatos.SelectedRows.Count > 0)
-              {
-                  OtDataSet2 ds = new OtDataSet2();
-                  DataTable dt = new DataTable();
-                  dt = ds.Tables["Respaldo"];
-                  int num = DgvDetalles.Rows.Count - 1;
-                  for (int i = 0; i <= num; i++)
-                  {
-                      dt.Rows.Add(DgvDetalles.Rows[i].Cells["tercero"].Value, DgvDetalles.Rows[i].Cells["cuarto"].Value, DgvDetalles.Rows[i].Cells["quinto"].Value, DgvDetalles.Rows[i].Cells["sexto"].Value, DgvDetalles.Rows[i].Cells["septimo"].Value);
-                  }
-                  LocalReport localReport = MyProject.Forms.FrmReporteOT2.ReportViewer1.LocalReport;
-                  localReport.ReportPath = "ReporteRespaldo.rdlc";
-                  localReport.DataSources.Clear();
-                  localReport.DataSources.Add(new ReportDataSource("RespaldoDataSet", dt));
-                  localReport = null;
-                  MyProject.Forms.FrmReporteOT2.Show();
-                  MyProject.Forms.FrmReporteOT2.ReportViewer1.RefreshReport();
-              }
-              else
-              {
-                  Interaction.MsgBox("Debes Seleccionar Un Registro De Planilla Estiba");
-              }
-          }*/
-        MessageBox.Show("Continuar -->");
+        if (Operators.CompareString(TxtFolio.Text, "", TextCompare: false) == 0)
+        {
+            Interaction.MsgBox("Debe seleccionar una OT para Continuar",MsgBoxStyle.Exclamation);
+            return;
+        }
+
+        EnviarDatos.id = TxtIdDatos.Text;
+        EnviarDatos.destino = TxtDestinoDatos.Text;
+        EnviarDatos.rampla = TxtRamplaDatos.Text;
+        EnviarDatos.fecha = TxtFechaDatos.Text;
+        EnviarDatos.folio = TxtFolio.Text;
+        EnviarDatos.hora = TxtHoraDatos.Text;
+        EnviarDatos.usuario = TxtUsuariosDatos.Text;
+
+        MyProject.Forms.FrmContinuarOT.Close();
+        Dispose();
+        MyProject.Forms.FrmIngresarOT.ShowDialog();
+
     }
 }

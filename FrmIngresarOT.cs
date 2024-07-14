@@ -447,7 +447,8 @@ public class FrmIngresarOT : Form
 	{
 		base.Load += FrmIngresarOT_Load;
 		base.Closing += FrmIngresarOT_Closing;
-		InitializeComponent();
+        
+        InitializeComponent();
 	}
 
 	[DebuggerNonUserCode]
@@ -951,11 +952,14 @@ public class FrmIngresarOT : Form
 
 	private void FrmIngresarOT_Load(object sender, EventArgs e)
 	{
-		TxtPistolear.Focus();
+        TxtHora.Text = EnviarDatos.hora;
+        TxtPistolear.Focus();
 		obtener_hora();
 		obtener_datos();
 		codigo_sucursal();
-	}
+        Mostrar_Detalles();
+
+    }
 
 	private void FrmIngresarOT_Closing(object sender, CancelEventArgs e)
 	{
@@ -1253,8 +1257,41 @@ public class FrmIngresarOT : Form
         consolidaOt.SumAllOt(TxtOt.Text);
     }
 
-	// Metodo que se accede al ingresar Operacion
-	private void BtnOperacion_Click(object sender, EventArgs e)
+    private void Mostrar_Detalles()
+    {
+        ModuleDB.Conectar();
+        string vSql = "select * from tbl_detalles where folio like'%" + TxtFolio.Text + "%'";
+        MySqlCommand vCmd = new MySqlCommand(vSql, ModuleDB.vConn);
+        MySqlDataReader vReader = vCmd.ExecuteReader();
+        DgvIngresarOT.Rows.Clear();
+        while (vReader.Read())
+        {
+
+            TxtFolio.Text = vReader.GetString(1);
+            TxtDestino2.Text = vReader.GetString(2);
+            TxtCodigo2.Text = vReader.GetString(3);
+            TxtOt.Text =    vReader.GetString(4);
+            TxtBulto.Text = vReader.GetString(5);
+            TxtHora.Text = vReader.GetString(6);
+
+            codigo_a_txt();
+            BarCode128();
+            MemoryStream ms2 = new MemoryStream();
+            Bitmap bmpImage2 = new Bitmap(ImagenCode.Image);
+            bmpImage2.Save(ms2, ImageFormat.Jpeg);
+            byte[] bytImage2 = ms2.ToArray();
+            ms2.Close();
+
+            DgvIngresarOT.Rows.Add(TxtFolio.Text, TxtDestino2.Text, TxtCodigo2.Text, TxtOt.Text, TxtBulto.Text, TxtHora.Text, bytImage2);
+            consolidaOt.ConsultarExpedicion(TxtOt.Text, Convert.ToInt32(TxtBulto.Text));
+            consolidaOt.SumAllOt(TxtOt.Text);
+        }
+        vReader.Close();
+        ModuleDB.Desconectar();
+    }
+
+    // Metodo que se accede al ingresar Operacion
+    private void BtnOperacion_Click(object sender, EventArgs e)
 	{
 		if (TxtPistolear.TextLength == 22)
 		{
