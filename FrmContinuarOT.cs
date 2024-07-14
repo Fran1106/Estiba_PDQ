@@ -26,11 +26,6 @@ public class FrmContinuarOT : Form
 
     [CompilerGenerated]
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    [AccessedThroughProperty("TxtBuscarDatos")]
-    private TextBox _TxtBuscarDatos;
-
-    [CompilerGenerated]
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     [AccessedThroughProperty("TxtBuscarDetalles")]
     private TextBox _TxtBuscarDetalles;
 
@@ -163,32 +158,6 @@ public class FrmContinuarOT : Form
         set;
     }
 
-    internal virtual TextBox TxtBuscarDatos
-    {
-        [CompilerGenerated]
-        get
-        {
-            return _TxtBuscarDatos;
-        }
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        [CompilerGenerated]
-        set
-        {
-            EventHandler value2 = TxtBuscarDatos_TextChanged;
-            TextBox txtBuscarDatos = _TxtBuscarDatos;
-            if (txtBuscarDatos != null)
-            {
-                txtBuscarDatos.TextChanged -= value2;
-            }
-            _TxtBuscarDatos = value;
-            txtBuscarDatos = _TxtBuscarDatos;
-            if (txtBuscarDatos != null)
-            {
-                txtBuscarDatos.TextChanged += value2;
-            }
-        }
-    }
-
     [field: AccessedThroughProperty("Label9")]
     internal virtual Label Label9
     {
@@ -198,20 +167,6 @@ public class FrmContinuarOT : Form
 
     [field: AccessedThroughProperty("DgvDetalles")]
     internal virtual DataGridView DgvDetalles
-    {
-        get; [MethodImpl(MethodImplOptions.Synchronized)]
-        set;
-    }
-
-    [field: AccessedThroughProperty("Label7")]
-    internal virtual Label Label7
-    {
-        get; [MethodImpl(MethodImplOptions.Synchronized)]
-        set;
-    }
-
-    [field: AccessedThroughProperty("PictureBox2")]
-    internal virtual PictureBox PictureBox2
     {
         get; [MethodImpl(MethodImplOptions.Synchronized)]
         set;
@@ -306,13 +261,6 @@ public class FrmContinuarOT : Form
 
     [field: AccessedThroughProperty("TxtOtDetalle")]
     internal virtual TextBox TxtOtDetalle
-    {
-        get; [MethodImpl(MethodImplOptions.Synchronized)]
-        set;
-    }
-
-    [field: AccessedThroughProperty("Label10")]
-    internal virtual Label Label10
     {
         get; [MethodImpl(MethodImplOptions.Synchronized)]
         set;
@@ -525,7 +473,7 @@ public class FrmContinuarOT : Form
     [System.Diagnostics.DebuggerStepThrough]
     private void InitializeComponent()
     {
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Sistema_Estiba_PDQ.FrmRegistrosOT));
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Sistema_Estiba_PDQ.FrmContinuarOT));
         this.GroupBox1 = new System.Windows.Forms.GroupBox();
         this.Label18 = new System.Windows.Forms.Label();
         this.DgvDatos = new System.Windows.Forms.DataGridView();
@@ -551,7 +499,7 @@ public class FrmContinuarOT : Form
         this.TxtIdDatos = new System.Windows.Forms.TextBox();
         this.Label1 = new System.Windows.Forms.Label();
         
-        this.TxtBuscarDatos = new System.Windows.Forms.TextBox();
+
         this.Label9 = new System.Windows.Forms.Label();
         this.GroupBox2 = new System.Windows.Forms.GroupBox();
         this.Label19 = new System.Windows.Forms.Label();
@@ -570,10 +518,8 @@ public class FrmContinuarOT : Form
         this.TxtBultoDetalle = new System.Windows.Forms.TextBox();
         this.Label15 = new System.Windows.Forms.Label();
         this.TxtOtDetalle = new System.Windows.Forms.TextBox();
-        this.Label10 = new System.Windows.Forms.Label();
-        this.Label7 = new System.Windows.Forms.Label();
+        
         this.TxtCodigoDetalle = new System.Windows.Forms.TextBox();
-        this.PictureBox2 = new System.Windows.Forms.PictureBox();
         this.Label11 = new System.Windows.Forms.Label();
         this.TxtBuscarDetalles = new System.Windows.Forms.TextBox();
         this.TxtDestinoDetalle = new System.Windows.Forms.TextBox();
@@ -589,7 +535,6 @@ public class FrmContinuarOT : Form
         this.GroupBox2.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)this.PictureBox1).BeginInit();
         ((System.ComponentModel.ISupportInitialize)this.DgvDetalles).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)this.PictureBox2).BeginInit();
         base.SuspendLayout();
         this.GroupBox1.Controls.Add(this.Label18);        
         this.GroupBox1.Controls.Add(this.DgvDatos);
@@ -608,7 +553,6 @@ public class FrmContinuarOT : Form
         this.GroupBox1.Controls.Add(this.TxtIdDatos);
         this.GroupBox1.Controls.Add(this.Label1);
         
-        this.GroupBox1.Controls.Add(this.TxtBuscarDatos);
         this.GroupBox1.Controls.Add(this.Label9);
         this.GroupBox1.Dock = System.Windows.Forms.DockStyle.Left;
         this.GroupBox1.Location = new System.Drawing.Point(0, 0);
@@ -758,13 +702,7 @@ public class FrmContinuarOT : Form
         this.Label1.Size = new System.Drawing.Size(23, 17);
         this.Label1.TabIndex = 17;
         this.Label1.Text = "ID";
-       
-        this.TxtBuscarDatos.Anchor = System.Windows.Forms.AnchorStyles.Top;
-        this.TxtBuscarDatos.Location = new System.Drawing.Point(180, 65);
-        this.TxtBuscarDatos.Margin = new System.Windows.Forms.Padding(4);
-        this.TxtBuscarDatos.Name = "TxtBuscarDatos";
-        this.TxtBuscarDatos.Size = new System.Drawing.Size(241, 22);
-        this.TxtBuscarDatos.TabIndex = 14;
+     
      
         this.GroupBox2.Controls.Add(this.Label19);
         this.GroupBox2.Controls.Add(this.BtnContinuar);
@@ -775,12 +713,9 @@ public class FrmContinuarOT : Form
         this.GroupBox2.Controls.Add(this.TxtBultoDetalle);
         this.GroupBox2.Controls.Add(this.Label15);
         this.GroupBox2.Controls.Add(this.TxtOtDetalle);
-        this.GroupBox2.Controls.Add(this.Label10);
-        this.GroupBox2.Controls.Add(this.Label7);
+        
         this.GroupBox2.Controls.Add(this.TxtCodigoDetalle);
-        this.GroupBox2.Controls.Add(this.PictureBox2);
         this.GroupBox2.Controls.Add(this.Label11);
-        this.GroupBox2.Controls.Add(this.TxtBuscarDetalles);
         this.GroupBox2.Controls.Add(this.TxtDestinoDetalle);
         this.GroupBox2.Controls.Add(this.Label8);
         this.GroupBox2.Controls.Add(this.Label12);
@@ -811,7 +746,7 @@ public class FrmContinuarOT : Form
         this.BtnContinuar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
         this.BtnContinuar.Location = new System.Drawing.Point(649, 10);
         this.BtnContinuar.Margin = new System.Windows.Forms.Padding(4);
-        this.BtnContinuar.Name = "BtnContinuar";
+        this.BtnContinuar.Name = "BtnCon<tinuar";
         this.BtnContinuar.Size = new System.Drawing.Size(87, 68);
         this.BtnContinuar.TabIndex = 3;
         this.BtnContinuar.UseVisualStyleBackColor = true;
@@ -906,39 +841,13 @@ public class FrmContinuarOT : Form
         this.TxtOtDetalle.Name = "TxtOtDetalle";
         this.TxtOtDetalle.Size = new System.Drawing.Size(241, 22);
         this.TxtOtDetalle.TabIndex = 37;
-        this.Label10.AutoSize = true;
-        this.Label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-        this.Label10.ForeColor = System.Drawing.Color.White;
-        this.Label10.Location = new System.Drawing.Point(83, 305);
-        this.Label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.Label10.Name = "Label10";
-        this.Label10.Size = new System.Drawing.Size(30, 17);
-        this.Label10.TabIndex = 36;
-        this.Label10.Text = "OT";
-        this.Label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
-        this.Label7.AutoSize = true;
-        this.Label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12f, System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, 0);
-        this.Label7.ForeColor = System.Drawing.Color.White;
-        this.Label7.Location = new System.Drawing.Point(239, 17);
-        this.Label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.Label7.Name = "Label7";
-        this.Label7.Size = new System.Drawing.Size(252, 25);
-        this.Label7.TabIndex = 31;
-        this.Label7.Text = "Detalles De Cargas (OT)";
+           
         this.TxtCodigoDetalle.Location = new System.Drawing.Point(197, 268);
         this.TxtCodigoDetalle.Margin = new System.Windows.Forms.Padding(4);
         this.TxtCodigoDetalle.Name = "TxtCodigoDetalle";
         this.TxtCodigoDetalle.Size = new System.Drawing.Size(241, 22);
         this.TxtCodigoDetalle.TabIndex = 35;
-        this.PictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-        this.PictureBox2.Image = Sistema_Estiba_PDQ.My.Resources.Resources.Ico_Buscar;
-        this.PictureBox2.Location = new System.Drawing.Point(505, 53);
-        this.PictureBox2.Margin = new System.Windows.Forms.Padding(4);
-        this.PictureBox2.Name = "PictureBox2";
-        this.PictureBox2.Size = new System.Drawing.Size(40, 37);
-        this.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-        this.PictureBox2.TabIndex = 30;
-        this.PictureBox2.TabStop = false;
+     
         this.Label11.AutoSize = true;
         this.Label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
         this.Label11.ForeColor = System.Drawing.Color.White;
@@ -1019,7 +928,6 @@ public class FrmContinuarOT : Form
         this.GroupBox2.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)this.PictureBox1).EndInit();
         ((System.ComponentModel.ISupportInitialize)this.DgvDetalles).EndInit();
-        ((System.ComponentModel.ISupportInitialize)this.PictureBox2).EndInit();
         base.ResumeLayout(false);
     }
 
@@ -1043,25 +951,6 @@ public class FrmContinuarOT : Form
         ModuleDB.Desconectar();
     }
 
-    private void Buscar_Datos()
-    {
-        ModuleDB.Conectar();
-        string vSql = "select * from tbl_datos where folio like'%" + TxtBuscarDatos.Text + "%'or usuario like'%" + TxtBuscarDatos.Text + "%'or fecha like'%" + TxtBuscarDatos.Text + "%'or destino like'%" + TxtBuscarDatos.Text + "%'";
-        MySqlCommand vCmd = new MySqlCommand(vSql, ModuleDB.vConn);
-        MySqlDataReader vReader = vCmd.ExecuteReader();
-        DgvDatos.Rows.Clear();
-        while (vReader.Read())
-        {
-            DgvDatos.Rows.Add(vReader.GetString(0), vReader.GetString(1), vReader.GetString(2), vReader.GetString(3), vReader.GetString(4), vReader.GetString(5));
-        }
-        vReader.Close();
-        ModuleDB.Desconectar();
-    }
-
-    private void TxtBuscarDatos_TextChanged(object sender, EventArgs e)
-    {
-        Buscar_Datos();
-    }
 
     private void DgvDatos_CellClick(object sender, DataGridViewCellEventArgs e)
     {
