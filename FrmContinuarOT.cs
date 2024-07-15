@@ -939,7 +939,7 @@ public class FrmContinuarOT : Form
     private void Mostrar_Datos()
     {
         ModuleDB.Conectar();
-        string vSql = "select *  from tbl_datos where usuario = \'" + EnviarDatos.login + "\'\n and date_format(STR_TO_DATE(fecha, \'%d/%m/%Y\'),\'%Y-%m-%d\') = date_format(curdate()-5,\'%Y-%m-%d\')\norder by hora desc";
+        string vSql = "select *  from tbl_datos where usuario = \'" + EnviarDatos.login + "\'\n and date_format(STR_TO_DATE(fecha, \'%d-%m-%Y\'),\'%Y-%m-%d\') = date_format(curdate(),\'%Y-%m-%d\')\norder by hora desc";
         MySqlCommand vCmd = new MySqlCommand(vSql, ModuleDB.vConn);
         MySqlDataReader vReader = vCmd.ExecuteReader();
         DgvDatos.Rows.Clear();
