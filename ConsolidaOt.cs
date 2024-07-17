@@ -19,7 +19,8 @@ public class ConsolidaOt
 
     private Hashtable dataHashOt = new Hashtable();
     List<int> listaNbulto;
-    private long PesoVolumetrico = 0L;
+    private int PesoVolumetrico = 0;
+    private int Kilogramos = 0;
 
     public void ConsultarExpedicion(string expedicion, int numBultos)
     {
@@ -39,17 +40,19 @@ public class ConsolidaOt
 
             while (read.Read())
             {
-                string pvkilos = Convert.ToString(read["PVKILOS"]);
+                int pvkilos = Convert.ToInt32(read["PVKILOS"]);
                 int bultos = Convert.ToInt32(read["BULTOS"]);
+                int kilos = Convert.ToInt32(read["KILOS"]);
                
-                    listaNbulto = new List<int>();
-                    listaNbulto.Add(numBultos);
+                    this.listaNbulto = new List<int>();
+                    this.listaNbulto.Add(numBultos);
                     dataHashOt.Add(expedicion, new DataReporteCalidad(
                         expedicion,
                         bultos, 
                         pvkilos, 
                         bultos.Equals(1), 
-                        listaNbulto));
+                        listaNbulto,
+                        kilos));
             }
 
             ModuleNpgSql.Desconection();
@@ -70,11 +73,13 @@ public class ConsolidaOt
         {
             dataReporteCalidad.PrintOK = true;
             dataHashOt[ot] = dataReporteCalidad;
-            AddPesoVol(Conversions.ToLong(dataReporteCalidad.Pvkilos));
+            AddPesoVol(dataReporteCalidad.Pvkilos);
+            AddKilosgramos(dataReporteCalidad.Kilos);
+
         }
     }
 
-    public bool ValidaExpedicionesCompleta()
+    public void ValidaExpedicionesCompleta()
     {
         ICollection keys = dataHashOt.Keys;
         foreach (string key in keys)
@@ -86,15 +91,19 @@ public class ConsolidaOt
                 Interaction.MsgBox("Falta ingresar : "+ (dataReporteCalidad.Bultos-dataReporteCalidad.Nbultos.Count) + 
                     ((dataReporteCalidad.Bultos - dataReporteCalidad.Nbultos.Count)>1 ?" Bultos ":" Bulto ")
                     +"para la Ot : "+ dataReporteCalidad.Expedicion, MsgBoxStyle.Information, ":: PDQ :::");
-                return false;
+                
             }
-        }
-        return true;
+        }        
     }
 
-    public void AddPesoVol(long NewPeso)
+    public void AddPesoVol(int pvkilos)
     {
-        this.PesoVolumetrico += NewPeso;
+        this.PesoVolumetrico += pvkilos;
+    }
+
+    public void AddKilosgramos(int kilogramos)
+    {
+        this.Kilogramos += kilogramos;
     }
 
     public void EvalExpedicionExistente(string Ot, int Nbulto)
@@ -115,25 +124,25 @@ public class ConsolidaOt
         dataHashOt[Ot] = dataReporteCalidad;
     }
 
-    public long GetPesoVolumetrico() 
-    { 
-        return this.PesoVolumetrico;
-    }
+    public int GetPesoVolumetrico() { return this.PesoVolumetrico; }
+
+    public int GetKilos() { return this.Kilogramos; }
     
     public class DataReporteCalidad
     {
         public string Expedicion {get; set;}
         public int Bultos { get; set; }
-        public string Pvkilos { get; set; }
+        public int Pvkilos { get; set; }
         public bool BultosOk { get; set; }
         public List<int> Nbultos { get; set;}
         public bool PrintOK { get; set; }
+        public int Kilos { get; set; }
 
         public DataReporteCalidad()
         {
         }
 
-        public DataReporteCalidad(string expedicion,int bultos, string pvkilos, bool bultosOk, List<int> nbultos)
+        public DataReporteCalidad(string expedicion,int bultos, int pvkilos, bool bultosOk, List<int> nbultos, int Kilos )
         { 
             this.Expedicion = expedicion; 
             this.Bultos = bultos;  
@@ -141,6 +150,7 @@ public class ConsolidaOt
             this.BultosOk = bultosOk;
             this.Nbultos = nbultos;
             this.PrintOK = false;
+            this.Kilos = Kilos;
         }
     }
 }

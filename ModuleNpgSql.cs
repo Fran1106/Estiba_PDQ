@@ -35,8 +35,6 @@ internal sealed class ModuleNpgSql
     public static void Desconection()
     { 
         connNpg.Dispose();
-
     }
-
 }
 

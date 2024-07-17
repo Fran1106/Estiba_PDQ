@@ -22,7 +22,7 @@ namespace Sistema_Estiba_PDQ;
 public class FrmIngresarOT : Form
 {
 	private IContainer components;
-    ConsolidaOt consolidaOt = new ConsolidaOt();
+    private ConsolidaOt consolidaOt = new();
 
     [CompilerGenerated]
 	[DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -1361,7 +1361,9 @@ public class FrmIngresarOT : Form
 			localReport.ReportPath = "ReporteOT.rdlc";
 			localReport.DataSources.Clear();
 			localReport.DataSources.Add(new ReportDataSource("OTDataset", dt));
-			var parameters = new[] { new ReportParameter("PesoVolumetrico", Conversions.ToString(consolidaOt.GetPesoVolumetrico()))};
+            var parameters = new[] { new ReportParameter("PesoVolumetrico", consolidaOt.GetPesoVolumetrico().ToString())
+                ,new ReportParameter("Kilos", consolidaOt.GetKilos().ToString())};
+                
             localReport.SetParameters(parameters);
        		localReport = null;
             MyProject.Forms.FrmReporteOT.ShowDialog();
@@ -1392,13 +1394,11 @@ public class FrmIngresarOT : Form
 	}
 
 	private void BtnImprimir_Click(object sender, EventArgs e)
-	{   
-        if (!consolidaOt.ValidaExpedicionesCompleta()) 
-		{
-            TxtPistolear.Focus();
-            return; 
-		}
-		guardar_detalles();
+	{
+        consolidaOt.ValidaExpedicionesCompleta();
+        
+        TxtPistolear.Focus();
+        guardar_detalles();
         imprimir_reporte();
 		Close();
 	}
