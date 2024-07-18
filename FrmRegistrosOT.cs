@@ -18,8 +18,9 @@ namespace Sistema_Estiba_PDQ;
 public class FrmRegistrosOT : Form
 {
 	private IContainer components;
+    private ConsolidaOt consolidaOt = new();
 
-	[CompilerGenerated]
+    [CompilerGenerated]
 	[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 	[AccessedThroughProperty("DgvDatos")]
 	private DataGridView _DgvDatos;
@@ -1199,13 +1200,22 @@ public class FrmRegistrosOT : Form
 				for (int i = 0; i <= num; i++)
 				{
 					dt.Rows.Add(DgvDetalles.Rows[i].Cells["tercero"].Value, DgvDetalles.Rows[i].Cells["cuarto"].Value, DgvDetalles.Rows[i].Cells["quinto"].Value, DgvDetalles.Rows[i].Cells["sexto"].Value, DgvDetalles.Rows[i].Cells["septimo"].Value);
-				}
-				LocalReport localReport = MyProject.Forms.FrmReporteOT2.ReportViewer1.LocalReport;
-				localReport.ReportPath = "ReporteRespaldo.rdlc";
+                    string Ot = DgvDetalles.Rows[i].Cells["quinto"].Value.ToString();
+                    int bultos = Convert.ToInt32(DgvDetalles.Rows[i].Cells["sexto"].Value);
+                    
+                    consolidaOt.ConsultarExpedicion(Ot, bultos);
+                   // consolidaOt.ValidaExpedicionesCompleta();
+                    consolidaOt.SumAllOt(Ot);
+                }
+                LocalReport localReport = MyProject.Forms.FrmReporteOT2.ReportViewer1.LocalReport;
+                localReport.ReportPath = "ReporteRespaldo.rdlc";
 				localReport.DataSources.Clear();
 				localReport.DataSources.Add(new ReportDataSource("RespaldoDataSet", dt));
-				localReport = null;
-				MyProject.Forms.FrmReporteOT2.Show();
+                var parameters = new[] { new ReportParameter("PesoVolumetrico", consolidaOt.GetPesoVolumetrico().ToString())
+                ,new ReportParameter("Kilos", consolidaOt.GetKilos().ToString())};
+                localReport.SetParameters(parameters);
+                localReport = null;
+                MyProject.Forms.FrmReporteOT2.Show();
 				MyProject.Forms.FrmReporteOT2.ReportViewer1.RefreshReport();
 			}
 			else
