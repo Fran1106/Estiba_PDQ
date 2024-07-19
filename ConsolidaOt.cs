@@ -32,7 +32,7 @@ public class ConsolidaOt
                 return;
             }
 
-            string query = "select * from  alerce.reporte_calidad where expedicion = " + expedicion;
+            string query = "select * from  alerce.reporte_calidad where nenvio = \'" + expedicion + "\'";
 
             ModuleNpgSql.Conexion();
             com = new NpgsqlCommand(query, ModuleNpgSql.connNpg);
