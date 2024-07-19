@@ -1320,7 +1320,7 @@ public class FrmIngresarOT : Form
 			TxtOt.Text = Palabra4[0].Substring(12, 9);
 			string Cadena6 = TxtPistolear.Text;
 			string[] Palabra6 = Cadena6.Split(default(char));
-			TxtBulto.Text = Palabra6[0].Substring(23, 3);
+			TxtBulto.Text = Palabra6[0].Substring(24, 3);
 			codigo_a_txt();
 			obtener_hora();
 			BtnAgregar.PerformClick();
