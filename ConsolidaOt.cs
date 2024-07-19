@@ -74,7 +74,7 @@ public class ConsolidaOt
         DataReporteCalidad dataReporteCalidad = (DataReporteCalidad)dataHashOt[ot];
 
         if (dataReporteCalidad == null) {
-            //Interaction.MsgBox("Ot  : " + ot + " No se encuntra en la Base para obtener información de Peso y Kilos ", MsgBoxStyle.Information, ":: PDQ :::");
+            Interaction.MsgBox("Ot  : " + ot + " No se encuntra en la Base para obtener información de Peso y Kilos ", MsgBoxStyle.Information, ":: PDQ :::");
             return; 
         }
 
@@ -105,10 +105,10 @@ public class ConsolidaOt
             }
         }
         // actualiza campos en tbl_datos pvkilos y kilos
-        UpdateKiloPbKilo(this.Kilogramos, this.PesoVolumetrico, this.Folio);
+        ValidaExpedicionesContinuar();
     }
 
-        public void ValidaExpedicionesContinuar()
+    public void ValidaExpedicionesContinuar()
     {   
         UpdateKiloPbKilo(this.Kilogramos, this.PesoVolumetrico, this.Folio);
     }
