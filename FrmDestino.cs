@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -195,7 +196,7 @@ public class FrmDestino : Form
 	[System.Diagnostics.DebuggerStepThrough]
 	private void InitializeComponent()
 	{
-		this.components = new System.ComponentModel.Container();
+        this.components = new System.ComponentModel.Container();
 		System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Sistema_Estiba_PDQ.FrmDestino));
 		this.GroupBox1 = new System.Windows.Forms.GroupBox();
 		this.TxtID = new System.Windows.Forms.TextBox();
@@ -287,17 +288,10 @@ public class FrmDestino : Form
 		this.TxtRampla.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
 		this.TxtRampla.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 		this.TxtRampla.FormattingEnabled = true;
-		this.TxtRampla.Items.AddRange(new object[72]
-		{
-			"400", "402", "403", "404", "405", "406", "407", "408", "411", "412",
-			"413", "414", "415", "417", "418", "419", "420", "421", "422", "423",
-			"425", "426", "427", "428", "432", "433", "434", "435", "436", "437",
-			"438", "439", "440", "441", "442", "443", "444", "445", "446", "447",
-			"448", "449", "451", "452", "453", "454", "455", "456", "457", "458",
-			"459", "460", "461", "462", "464", "465", "466", "467", "468", "469",
-			"470", "471", "472", "473", "474", "475", "476", "477", "478", "479",
-			"480", "EXTERNO"
-		});
+      
+        List<string> list = Ramplas();
+        foreach (string s in list) { this.TxtRampla.Items.Add(s); }
+
 		this.TxtRampla.Location = new System.Drawing.Point(209, 169);
 		this.TxtRampla.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 		this.TxtRampla.Name = "TxtRampla";
@@ -414,7 +408,7 @@ public class FrmDestino : Form
 	private void FrmDestino_Load(object sender, EventArgs e)
 	{
 		ModuleDB.Conectar();
-		obtener_fecha();
+        obtener_fecha();
 		obtener_nombre();
 		TxtDestino.Text = "";
 		TxtRampla.Text = "";
@@ -492,6 +486,33 @@ public class FrmDestino : Form
 			ProjectData.ClearProjectError();
 		}
 	}
+
+    private List<string> Ramplas()
+    {
+        List<string> ramplas = new List<string>();
+        try
+        {
+            ModuleDB.Conectar();
+            string vSql = "select * from tbl_rampla order by rampla desc";
+            MySqlCommand vCmd = new MySqlCommand(vSql, ModuleDB.vConn);
+            MySqlDataReader vReader = vCmd.ExecuteReader();
+            while (vReader.Read())
+            {
+                ramplas.Add(vReader.GetString(0));
+            }
+            vReader.Close();
+            ModuleDB.Desconectar();
+        }
+        catch (MySqlException ex2)
+        {
+            ProjectData.SetProjectError(ex2);
+            MySqlException ex = ex2;
+            Interaction.MsgBox(ex.Message, MsgBoxStyle.Critical, "Error");
+            ProjectData.ClearProjectError();
+        }
+        return ramplas;
+
+    }
 
 	private void BtnGuardar_Click(object sender, EventArgs e)
 	{

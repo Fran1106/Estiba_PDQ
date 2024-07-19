@@ -938,8 +938,7 @@ public class FrmContinuarOT : Form
 
     private void Mostrar_Datos()
     {
-        ModuleDB.Conectar();
-        //string vSql = "select * from tbl_datos where usuario = \'" + EnviarDatos.login + "\' \nand date_sub(date_time, INTERVAL 24 HOUR)< current_timestamp()";
+        ModuleDB.Conectar();        
         string vSql = "select id, folio, usuario, destino, rampla, fecha, date_format(date_time,\'%H:%i:%s\') date_time from tbl_datos where usuario = \'" + EnviarDatos.login + "\' \nand date_sub(date_time, INTERVAL 24 HOUR)<= current_timestamp()";
         MySqlCommand vCmd = new MySqlCommand(vSql, ModuleDB.vConn);
         MySqlDataReader vReader = vCmd.ExecuteReader();
