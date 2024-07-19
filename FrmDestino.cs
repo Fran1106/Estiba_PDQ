@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.CompilerServices;
@@ -10,6 +11,7 @@ using Microsoft.VisualBasic.CompilerServices;
 using MySql.Data.MySqlClient;
 using Sistema_Estiba_PDQ.My;
 using Sistema_Estiba_PDQ.My.Resources;
+using ZXing;
 
 namespace Sistema_Estiba_PDQ;
 
@@ -173,7 +175,11 @@ public class FrmDestino : Form
 	public FrmDestino()
 	{
 		base.Load += FrmDestino_Load;
-		obj = new Correlativo();
+
+        this.TxtRampla = new System.Windows.Forms.ComboBox();
+        Ramplas();
+
+        obj = new Correlativo();
 		InitializeComponent();
 	}
 
@@ -205,7 +211,6 @@ public class FrmDestino : Form
 		this.Label6 = new System.Windows.Forms.Label();
 		this.TxtUsuario = new System.Windows.Forms.TextBox();
 		this.Label4 = new System.Windows.Forms.Label();
-		this.TxtRampla = new System.Windows.Forms.ComboBox();
 		this.Label8 = new System.Windows.Forms.Label();
 		this.Label7 = new System.Windows.Forms.Label();
 		this.Label2 = new System.Windows.Forms.Label();
@@ -288,11 +293,7 @@ public class FrmDestino : Form
 		this.TxtRampla.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
 		this.TxtRampla.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 		this.TxtRampla.FormattingEnabled = true;
-      
-        List<string> list = Ramplas();
-        foreach (string s in list) { this.TxtRampla.Items.Add(s); }
-
-		this.TxtRampla.Location = new System.Drawing.Point(209, 169);
+        this.TxtRampla.Location = new System.Drawing.Point(209, 169);
 		this.TxtRampla.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 		this.TxtRampla.Name = "TxtRampla";
 		this.TxtRampla.Size = new System.Drawing.Size(139, 24);
@@ -487,18 +488,18 @@ public class FrmDestino : Form
 		}
 	}
 
-    private List<string> Ramplas()
+    private void Ramplas()
     {
-        List<string> ramplas = new List<string>();
         try
         {
             ModuleDB.Conectar();
             string vSql = "select * from tbl_rampla order by rampla desc";
             MySqlCommand vCmd = new MySqlCommand(vSql, ModuleDB.vConn);
             MySqlDataReader vReader = vCmd.ExecuteReader();
+
             while (vReader.Read())
             {
-                ramplas.Add(vReader.GetString(0));
+                this.TxtRampla.Items.Add(vReader.GetString(0));
             }
             vReader.Close();
             ModuleDB.Desconectar();
@@ -510,8 +511,6 @@ public class FrmDestino : Form
             Interaction.MsgBox(ex.Message, MsgBoxStyle.Critical, "Error");
             ProjectData.ClearProjectError();
         }
-        return ramplas;
-
     }
 
 	private void BtnGuardar_Click(object sender, EventArgs e)
