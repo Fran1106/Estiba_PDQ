@@ -1253,6 +1253,7 @@ public class FrmIngresarOT : Form
 			DgvIngresarOT.Rows.Add(TxtFolio.Text, TxtDestino2.Text, TxtCodigo2.Text, TxtOt.Text, TxtBulto.Text, TxtHora.Text, bytImage2);
 		}
 		GuardaOperacionTbl(TxtFolio.Text, TxtDestino2.Text, TxtCodigo2.Text, TxtOt.Text, TxtBulto.Text, TxtHora.Text);
+        consolidaOt.setFolio(TxtFolio.Text);
         consolidaOt.ConsultarExpedicion(TxtOt.Text, Convert.ToInt32(TxtBulto.Text));
         consolidaOt.SumAllOt(TxtOt.Text);
     }
@@ -1338,11 +1339,11 @@ public class FrmIngresarOT : Form
 		ModuleDB.Desconectar();
     }
 
-	private void guardar_detalles()
+    private void guardar_detalles()
 	{
     	string conteo = Conversions.ToString(DgvIngresarOT.RowCount);
 		Interaction.MsgBox("Registros Guardados - El Total De Registros Es: " + conteo, MsgBoxStyle.Information, ":: PDQ :::");
-		ordenar_datos();
+        ordenar_datos();
 	}
 
 	private void imprimir_reporte()

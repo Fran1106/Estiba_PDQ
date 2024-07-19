@@ -1204,9 +1204,11 @@ public class FrmRegistrosOT : Form
                     int bultos = Convert.ToInt32(DgvDetalles.Rows[i].Cells["sexto"].Value);
                     
                     consolidaOt.ConsultarExpedicion(Ot, bultos);
-                   // consolidaOt.ValidaExpedicionesCompleta();
                     consolidaOt.SumAllOt(Ot);
                 }
+
+                consolidaOt.ValidaExpedicionesContinuar();
+
                 LocalReport localReport = MyProject.Forms.FrmReporteOT2.ReportViewer1.LocalReport;
                 localReport.ReportPath = "ReporteRespaldo.rdlc";
 				localReport.DataSources.Clear();

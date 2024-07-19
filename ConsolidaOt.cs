@@ -9,6 +9,8 @@ using Npgsql;
 using Microsoft.VisualBasic.CompilerServices;
 using Microsoft.VisualBasic.Logging;
 using Microsoft.VisualBasic;
+using MySql.Data.MySqlClient;
+using static Sistema_Estiba_PDQ.ConsolidaOt;
 
 namespace Sistema_Estiba_PDQ;
 
@@ -21,6 +23,7 @@ public class ConsolidaOt
     List<int> listaNbulto;
     private int PesoVolumetrico = 0;
     private int Kilogramos = 0;
+    private string Folio;
 
     public void ConsultarExpedicion(string expedicion, int numBultos)
     {
@@ -85,6 +88,7 @@ public class ConsolidaOt
         }
     }
 
+    //Esto se ejecuta al presionar imprmir
     public void ValidaExpedicionesCompleta()
     {
         ICollection keys = dataHashOt.Keys;
@@ -92,14 +96,30 @@ public class ConsolidaOt
         {
             DataReporteCalidad dataReporteCalidad = (DataReporteCalidad)dataHashOt[key];
 
-            if (!dataReporteCalidad.BultosOk) 
+            if (!dataReporteCalidad.BultosOk)
             {
-                Interaction.MsgBox("Falta ingresar : "+ (dataReporteCalidad.Bultos-dataReporteCalidad.Nbultos.Count) + 
-                    ((dataReporteCalidad.Bultos - dataReporteCalidad.Nbultos.Count)>1 ?" Bultos ":" Bulto ")
-                    +"para la Ot : "+ dataReporteCalidad.Expedicion, MsgBoxStyle.Information, ":: PDQ :::");
-                
+                Interaction.MsgBox("Falta ingresar : " + (dataReporteCalidad.Bultos - dataReporteCalidad.Nbultos.Count) +
+                    ((dataReporteCalidad.Bultos - dataReporteCalidad.Nbultos.Count) > 1 ? " Bultos " : " Bulto ")
+                    + "para la Ot : " + dataReporteCalidad.Expedicion, MsgBoxStyle.Information, ":: PDQ :::");
+
             }
-        }        
+        }
+        // actualiza campos en tbl_datos pvkilos y kilos
+        UpdateKiloPbKilo(this.Kilogramos, this.PesoVolumetrico, this.Folio);
+    }
+
+        public void ValidaExpedicionesContinuar()
+    {   
+        UpdateKiloPbKilo(this.Kilogramos, this.PesoVolumetrico, this.Folio);
+    }
+
+    private void UpdateKiloPbKilo(int kilos, int pvkilos, string folio)
+    {
+        ModuleDB.Conectar();
+        string vSql = "update tbl_datos set pvkilos = " + pvkilos + ", kilos = " + kilos + " where folio = \'" + folio + "\' ";
+        MySqlCommand vCmd = new MySqlCommand(vSql, ModuleDB.vConn);
+        vCmd.ExecuteNonQuery();
+        ModuleDB.Desconectar();
     }
 
     public void AddPesoVol(int pvkilos)
@@ -110,6 +130,16 @@ public class ConsolidaOt
     public void AddKilosgramos(int kilogramos)
     {
         this.Kilogramos += kilogramos;
+    }
+
+    public void setFolio(string folio) 
+    {
+        this.Folio = folio;
+    }
+
+    public string getFolio() 
+    {
+        return this.Folio;
     }
 
     public void EvalExpedicionExistente(string Ot, int Nbulto)
