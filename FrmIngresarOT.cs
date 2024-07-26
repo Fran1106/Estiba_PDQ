@@ -1296,15 +1296,16 @@ public class FrmIngresarOT : Form
 	{
 		if (TxtPistolear.TextLength == 22)
 		{
+            // cuando etiqueta es generada desde Alertran
 			string Cadena1 = TxtPistolear.Text;
 			string[] Palabra1 = Cadena1.Split(default(char));
-			TxtCodigo2.Text = Palabra1[0].Substring(0, 3);
+			TxtCodigo2.Text = Palabra1[0].Substring(0, 3); // plaza origen
 			string Cadena3 = TxtPistolear.Text;
 			string[] Palabra3 = Cadena3.Split(default(char));
-			TxtOt.Text = Palabra3[0].Substring(11, 8);
+			TxtOt.Text = Palabra3[0].Substring(11, 8); // OT son 8 caracteres
 			string Cadena5 = TxtPistolear.Text;
 			string[] Palabra5 = Cadena5.Split(default(char));
-			TxtBulto.Text = Palabra5[0].Substring(19, 3);
+			TxtBulto.Text = Palabra5[0].Substring(19, 3); // numero de bultos
 			codigo_a_txt();
 			obtener_hora();
 			BtnAgregar.PerformClick();
@@ -1313,15 +1314,16 @@ public class FrmIngresarOT : Form
 		}
 		else if (TxtPistolear.TextLength >= 25)
 		{
-			string Cadena2 = TxtPistolear.Text;
+            // cuando etiqueta es generada desde GTS
+            string Cadena2 = TxtPistolear.Text;
 			string[] Palabra2 = Cadena2.Split(default(char));
-			TxtCodigo2.Text = Palabra2[0].Substring(3, 3);
+			TxtCodigo2.Text = Palabra2[0].Substring(3, 3); // Cod plaza destino
 			string Cadena4 = TxtPistolear.Text;
 			string[] Palabra4 = Cadena4.Split(default(char));
-			TxtOt.Text = Palabra4[0].Substring(12, 9);
+			TxtOt.Text = Palabra4[0].Substring(12, 9); // OT son 9 caracteres
 			string Cadena6 = TxtPistolear.Text;
 			string[] Palabra6 = Cadena6.Split(default(char));
-			TxtBulto.Text = Palabra6[0].Substring(24, 3);
+			TxtBulto.Text = Palabra6[0].Substring(24, 3); // Bultos
 			codigo_a_txt();
 			obtener_hora();
 			BtnAgregar.PerformClick();
