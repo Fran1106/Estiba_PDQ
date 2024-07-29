@@ -15,12 +15,17 @@ using MySql.Data.MySqlClient;
 using Sistema_Estiba_PDQ.My;
 using Sistema_Estiba_PDQ.My.Resources;
 using ZXing;
+using System.Web;
+using System.Reflection;
 
 namespace Sistema_Estiba_PDQ;
 
 [DesignerGenerated]
 public class FrmIngresarOT : Form
 {
+
+    Log oLog = new Log(getDirectory());
+
 	private IContainer components;
     private ConsolidaOt consolidaOt = new();
 
@@ -1294,7 +1299,9 @@ public class FrmIngresarOT : Form
     // Metodo que se accede al ingresar Operacion
     private void BtnOperacion_Click(object sender, EventArgs e)
 	{
-		if (TxtPistolear.TextLength == 22)
+        oLog.Add("FrmIngresarOT : rampla: [" +TxtRampla.Text+ "] usuario: [" + TxtUsuario.Text + "] Cod Captura : [" + TxtPistolear.Text + "] Folio: [" + TxtFolio.Text + "]");
+
+        if (TxtPistolear.TextLength == 22)
 		{
             // cuando etiqueta es generada desde Alertran
 			string Cadena1 = TxtPistolear.Text;
@@ -1405,4 +1412,9 @@ public class FrmIngresarOT : Form
         imprimir_reporte();
 		Close();
 	}
+
+    public static string getDirectory()
+    { 
+        return Directory.GetCurrentDirectory();
+    }
 }
